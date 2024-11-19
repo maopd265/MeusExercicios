@@ -1,0 +1,20 @@
+CREATE SCHEMA teste_procedure;
+
+CREATE TABLE teste_procedure.test_proc(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(255)
+);
+
+CREATE PROCEDURE insert_test(VARCHAR) 
+LANGUAGE 'plpgsql'
+AS $$
+	BEGIN
+	IF $1 IS NOT NULL THEN
+	INSERT INTO teste_procedure.test_proc(nome) VALUES ($1);
+	COMMIT;
+	END IF;
+	END;
+$$;
+
+CALL insert_test('Mauricio');
+SELECT * FROM teste_procedure.test_proc;

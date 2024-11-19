@@ -1,0 +1,259 @@
+---
+title: "TarefaDois"
+author: "Mauricio Zalamena Bavaresco"
+date: "2022-09-29"
+output:
+  html_document:
+    df_print: paged
+---
+### 1.Carregue a base de dados e mostre a estrutura do dataset (str()). O arquivo do dataset não pode ser modificado de forma alguma. A leitura deverá tratar qualquer característica do arquivo.
+```{r}
+setwd("C:\\Users\\Mauricio\\Desktop\\Material\\Atividades\\Computação aplicada")
+
+dados = read.csv("Dry_Bean_Dataset.csv",sep=";",dec=",")
+```
+```{r}
+str(dados)
+```
+### 2.Altere a variável do tipo do feijão (Class) para um factor. 
+```{r}
+dados$Class = factor(c(dados$Class))
+summary(dados$Class)
+```
+
+
+### 3.Plote um gráfico de barras que ilustre as quantidades de cada classe.
+```{r}
+barplot(summary(dados$Class),names.arg = c("Brbnya", "Bombay", "Cali", "Dmason", "Horoz", "Seker", "Sira"),col="darkred")
+```
+
+
+### 4. Realize a normalização dos dados via Z-score. Plote um boxplot para ilustrar a distribuição de cada variável. Mostre as estatísticas de cada variável (summary). 
+
+```{r}
+escorez=as.data.frame(lapply(dados[,2:16],function(y)(y-mean(y))/sd(y) ))
+```
+
+
+###ou
+
+```{r}
+escorez=as.data.frame(scale(dados[,2:16]))
+```
+
+
+```{r}
+boxplot(escorez,col = "green")
+```
+
+
+
+```{r}
+summary(escorez)
+```
+
+### 5.Realize a seleção de características (correlação). Plote o gráfico de correlação. Liste as características que foram removidas.
+
+```{r}
+library(corrplot)
+```
+```{r}
+library(caret)
+```
+
+
+
+
+```{r}
+dadosCorrelacao = cor(dados[,1:5])
+corrplot.mixed(dadosCorrelacao,lower.col = "black")
+```
+
+```{r}
+correlacaoAlta = findCorrelation(dadosCorrelacao, cutoff=0.95)
+print(correlacaoAlta)
+```
+
+```{r}
+dadosCorrelacao = cor(dados[,6:11])
+corrplot.mixed(dadosCorrelacao,lower.col = "black")
+```
+
+```{r}
+correlacaoAlta = findCorrelation(dadosCorrelacao, cutoff=0.95)
+print(correlacaoAlta)
+```
+
+```{r}
+dadosCorrelacao = cor(dados[,12:16])
+corrplot.mixed(dadosCorrelacao,lower.col = "black")
+```
+
+
+
+
+```{r}
+correlacaoAlta = findCorrelation(dadosCorrelacao, cutoff=0.95)
+print(correlacaoAlta)
+```
+
+### 6.Plote um gráfico boxplot ou de densidade por variável x classe (organize em 3 colunas). Discuta qual é a variável que teria maior poder de discriminação? Existe alguma classe que pode ser classificada mais facilmente? Justifique a sua escolha.
+
+```{r}
+
+cores = c("red","green","blue","yellow","darkred","black","brown")
+par(mfrow=c(1,3))
+for (i in 1:16) {
+boxplot(dados[,i] ~ dados$Class, col=cores, xlab="Tipo de feijão",
+ylab="", main=names(dados)[i])
+}
+```
+
+### Na variável Área,Perimeter,MajorAxisLength,MinorAxisLength,ConvexArea,EquivDiameter,ShapeFactor1,ShapeFactor2 pode-se visualizar um maior poder de discriminação na classe BOMBAY porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+
+### Na variável AspectRation possuí duas classes com grande poder de discriminação que é a SEKER e HOROZ porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+
+### Na variável Eccentricity a classe que possuí maior poder de discriminação é SEKER porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+### Na variável Extent a classe horoz possuí maior poder de discriminação porque a mediana da classe horoz esta fora da caixa das outras
+
+### Na variável Solidity  a classe SEKER possuí maior poder de discriminação porque a mediana está fora das outras caixas 
+
+
+### Na variável roundness a classe SEKER possuí maior poder de discriminação porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+### Na variável Compactness as classes Seker e Horoz possuem maior poder de discriminação porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+
+### Na variavél ShapeFactor3 as classes Seker e Horoz possuem maior poder de discriminação porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+### Na variável ShapeFactor4 a classe Seker possui o maior poder de discriminação porque a mediana da classe está fora das outras caixas e não sobrepõe as outras caixas.
+
+
+```{r}
+print(levels(dados$Class))
+
+```
+
+### 7.Realize a projeção do dataset utilizando PCA. Explique as características dos componentes principais estimados. O que se pode explicar sobre os componentes principais utilizando o gráfico biplot. Apresente as características básicas (summary) dos dados.
+
+```{r}
+pca = prcomp(dados[,2:5], center=TRUE, scale=TRUE)
+print(pca)
+```
+
+```{r}
+biplot(pca,xlabs = rep("", nrow(dados[,1:16])))
+```
+```{r}
+summary(pca)
+```
+
+### O Gráfico Biplot é um tipo de gráfico exploratório usado em estatística. As variáveis que estão exibidas no gráfico são as variáveis que são linearmente correlacionadas. E os componentes visualizados pelo summary explicam a variância dos dados em relação ao a cada autovetor.
+
+
+### 8.Analise o dataset projetado com o auxílio do gráfico de boxplot por classe (igual ao do item 6).  Compare com o resultado do item 6. Se quiser, pode gerar um gráfico de espalhamento para auxiliar na explicação. 
+
+
+
+### Pode-se observar que quanto maior o poder de discriminação, maior é a correlação.
+
+```{r}
+cores = c("red","green","blue","yellow","darkred","black","brown")
+par(mfrow=c(1,3))
+for (i in 1:16) {
+boxplot(dados[,i] ~ dados$Class, col=cores, xlab="Tipo de feijão",
+ylab="", main=names(dados)[i])
+}
+```
+
+
+```{r}
+library(GGally)
+```
+
+
+```{r}
+
+
+ggpairs(dados[,1:3],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+
+```{r}
+
+
+ggpairs(dados[,4:6],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+
+```{r}
+
+
+ggpairs(dados[,7:9],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,10:12],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,13:15],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,15:17],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+
+### 9.É possível reduzir a dimensionalidade dos dados? Explique como! 
+
+
+### Sim é possível reduzir a dimensionalidade dos dados. A redução pode ser obtida por meio da remoção de informações irrelevantes/redundantes ou uma representação compacta e informativa dos dados originais. O mapeamento das entradas em um espaço original de d dimensões é realizado para um novo espaço com dimensões k (onde k <d), com uma perda mínima de informações.
+
+
+
+### 10.Analise o dataset reduzido com o auxílio do gráfico de boxplot por classe (igual ao do item 6).   Compare com o resultado do item 6 e do item 8. Se quiser, pode gerar um gráfico de espalhamento para auxiliar na explicação.
+
+
+```{r}
+nComp = 3
+dadosReduzidos = predict(pca, dados)[,1:nComp]
+summary(dadosReduzidos)
+```
+
+```{r}
+cores = c("red","green","blue","yellow","darkred","black","brown")
+par(mfrow=c(1,3))
+for (i in 1:16) {
+boxplot(dados[,i] ~ dados$Class, col=cores, xlab="Tipo de feijão",
+ylab="", main=names(dados)[i])
+}
+```
+
+
+### Pode-se observar que quanto maior o poder de discriminação, maior é a correlação.
+
+
+
+
+
+
+### 11. Após ter analisado estas informações, quais considerações você faz sobre este conjunto de dados (ou tarefa)?
+
+
+### Esse conjunto de dados (dataset) DryBeans em complemento a tarefa 1 foi possível observar a relação com os gráficos de espalhamento (correlação) e boxplot (com o poder de discriminação). Foi possível visualizar as informações obtidas, padrões e comportamento das informações através dos gráficos. 

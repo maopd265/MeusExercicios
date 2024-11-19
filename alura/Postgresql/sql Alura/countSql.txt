@@ -1,0 +1,8 @@
+SELECT * FROM lista.itens;
+INSERT INTO lista.itens(nome) VALUES
+('Salgadinho');
+
+SELECT COUNT(nome) FROM lista.itens;
+SELECT  COUNT(DISTINCT nome) FROM lista.itens ;
+
+SELECT COUNT(nome) FROM lista.itens WHERE nome LIKE 'Bolacha%';

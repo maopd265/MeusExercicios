@@ -1,0 +1,21 @@
+@media screen and (min-device-width:481px){
+.enchimentoComBorda{
+    border-color: black;
+    border-width: 1px;
+    border-style:solid;
+    border-radius: 15px;
+     background-color: rgb(109, 109, 156); 
+    padding: 10%;
+    line-height: 200%;
+    margin: 30px;
+    background-image: url(estrelajpg.jpg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 50px 50px;
+}
+}
+div{
+    /*height: 500px;
+    width: 500px;*/
+    margin-left: 35%;
+}

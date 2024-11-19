@@ -1,0 +1,27 @@
+.titulo
+{
+    font-family: 'Courier New', Courier, monospace;
+    
+    text-align: center;
+}
+.logotipo
+{
+    float: left;
+    margin-right: 20px;
+    text-align: center;
+}
+p
+{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.uniforme
+{
+    width: 300px;
+    height: 300px;
+    float: right;
+    margin-right: 20px;
+}

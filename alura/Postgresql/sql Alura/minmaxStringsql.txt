@@ -1,0 +1,18 @@
+
+CREATE TEMPORARY TABLE temptable(
+id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL
+);
+
+select * from temptable;
+INSERT INTO temptable(nome) VALUES ('Asd'),('Sda'),('Dsa');
+
+SELECT MIN(nome) FROM temptable;
+SELECT MAX(nome) FROM temptable;
+
+
+SELECT nome,LENGTH(nome)
+FROM temptable 
+WHERE nome = (SELECT MIN(nome) FROM temptable WHERE LENGTH(nome)=(SELECT MIN(LENGTH(nome)) FROM temptable))
+OR nome = (SELECT MIN(nome) FROM temptable WHERE LENGTH(nome)=(SELECT MAX(LENGTH(nome)) FROM temptable))
+ORDER BY LENGTH(nome);

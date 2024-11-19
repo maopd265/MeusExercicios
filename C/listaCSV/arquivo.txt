@@ -1,0 +1,3 @@
+Mauricio,Rua Doutor Jose Montaury,820
+Pitagoras,Rua Matematica,128
+Charles,Rua Morris,1798

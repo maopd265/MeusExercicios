@@ -1,0 +1,651 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={TarefaDois},
+  pdfauthor={Mauricio Zalamena Bavaresco},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{TarefaDois}
+\author{Mauricio Zalamena Bavaresco}
+\date{2022-09-29}
+
+\begin{document}
+\maketitle
+
+\hypertarget{carregue-a-base-de-dados-e-mostre-a-estrutura-do-dataset-str.-o-arquivo-do-dataset-nuxe3o-pode-ser-modificado-de-forma-alguma.-a-leitura-deveruxe1-tratar-qualquer-caracteruxedstica-do-arquivo.}{%
+\subsubsection{1.Carregue a base de dados e mostre a estrutura do
+dataset (str()). O arquivo do dataset não pode ser modificado de forma
+alguma. A leitura deverá tratar qualquer característica do
+arquivo.}\label{carregue-a-base-de-dados-e-mostre-a-estrutura-do-dataset-str.-o-arquivo-do-dataset-nuxe3o-pode-ser-modificado-de-forma-alguma.-a-leitura-deveruxe1-tratar-qualquer-caracteruxedstica-do-arquivo.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Mauricio}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Desktop}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Material}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Atividades}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Computação aplicada"}\NormalTok{)}
+
+\NormalTok{dados }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Dry\_Bean\_Dataset.csv"}\NormalTok{,}\AttributeTok{sep=}\StringTok{";"}\NormalTok{,}\AttributeTok{dec=}\StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    13611 obs. of  17 variables:
+##  $ Area           : int  28395 28734 29380 30008 30140 30279 30477 30519 30685 30834 ...
+##  $ Perimeter      : num  610 638 624 646 620 ...
+##  $ MajorAxisLength: num  208 201 213 211 202 ...
+##  $ MinorAxisLength: num  174 183 176 183 190 ...
+##  $ AspectRation   : num  1.2 1.1 1.21 1.15 1.06 ...
+##  $ Eccentricity   : num  0.55 0.412 0.563 0.499 0.334 ...
+##  $ ConvexArea     : int  28715 29172 29690 30724 30417 30600 30970 30847 31044 31120 ...
+##  $ EquivDiameter  : num  190 191 193 195 196 ...
+##  $ Extent         : num  0.764 0.784 0.778 0.783 0.773 ...
+##  $ Solidity       : num  0.989 0.985 0.99 0.977 0.991 ...
+##  $ roundness      : num  0.958 0.887 0.948 0.904 0.985 ...
+##  $ Compactness    : num  0.913 0.954 0.909 0.928 0.971 ...
+##  $ ShapeFactor1   : num  0.00733 0.00698 0.00724 0.00702 0.0067 ...
+##  $ ShapeFactor2   : num  0.00315 0.00356 0.00305 0.00321 0.00366 ...
+##  $ ShapeFactor3   : num  0.834 0.91 0.826 0.862 0.942 ...
+##  $ ShapeFactor4   : num  0.999 0.998 0.999 0.994 0.999 ...
+##  $ Class          : chr  "SEKER" "SEKER" "SEKER" "SEKER" ...
+\end{verbatim}
+
+\hypertarget{altere-a-variuxe1vel-do-tipo-do-feijuxe3o-class-para-um-factor.}{%
+\subsubsection{2.Altere a variável do tipo do feijão (Class) para um
+factor.}\label{altere-a-variuxe1vel-do-tipo-do-feijuxe3o-class-para-um-factor.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class }\OtherTok{=} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{Class))}
+\FunctionTok{summary}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{Class)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## BARBUNYA   BOMBAY     CALI DERMASON    HOROZ    SEKER     SIRA 
+##     1322      522     1630     3546     1928     2027     2636
+\end{verbatim}
+
+\hypertarget{plote-um-gruxe1fico-de-barras-que-ilustre-as-quantidades-de-cada-classe.}{%
+\subsubsection{3.Plote um gráfico de barras que ilustre as quantidades
+de cada
+classe.}\label{plote-um-gruxe1fico-de-barras-que-ilustre-as-quantidades-de-cada-classe.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{summary}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{Class),}\AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\StringTok{"Brbnya"}\NormalTok{, }\StringTok{"Bombay"}\NormalTok{, }\StringTok{"Cali"}\NormalTok{, }\StringTok{"Dmason"}\NormalTok{, }\StringTok{"Horoz"}\NormalTok{, }\StringTok{"Seker"}\NormalTok{, }\StringTok{"Sira"}\NormalTok{),}\AttributeTok{col=}\StringTok{"darkred"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{realize-a-normalizauxe7uxe3o-dos-dados-via-z-score.-plote-um-boxplot-para-ilustrar-a-distribuiuxe7uxe3o-de-cada-variuxe1vel.-mostre-as-estatuxedsticas-de-cada-variuxe1vel-summary.}{%
+\subsubsection{4. Realize a normalização dos dados via Z-score. Plote um
+boxplot para ilustrar a distribuição de cada variável. Mostre as
+estatísticas de cada variável
+(summary).}\label{realize-a-normalizauxe7uxe3o-dos-dados-via-z-score.-plote-um-boxplot-para-ilustrar-a-distribuiuxe7uxe3o-de-cada-variuxe1vel.-mostre-as-estatuxedsticas-de-cada-variuxe1vel-summary.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{escorez}\OtherTok{=}\FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(dados[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{16}\NormalTok{],}\ControlFlowTok{function}\NormalTok{(y)(y}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(y))}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(y) ))}
+\end{Highlighting}
+\end{Shaded}
+
+\#\#\#ou
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{escorez}\OtherTok{=}\FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{scale}\NormalTok{(dados[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{16}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(escorez,}\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(escorez)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Perimeter       MajorAxisLength   MinorAxisLength    AspectRation    
+##  Min.   :-1.5425   Min.   :-1.5933   Min.   :-1.7736   Min.   :-2.2636  
+##  1st Qu.:-0.7082   1st Qu.:-0.7800   1st Qu.:-0.5876   1st Qu.:-0.6119  
+##  Median :-0.2816   Median :-0.2714   Median :-0.2188   Median :-0.1302  
+##  Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  
+##  3rd Qu.: 0.5690   3rd Qu.: 0.6576   3rd Qu.: 0.3282   3rd Qu.: 0.5021  
+##  Max.   : 5.2736   Max.   : 4.8862   Max.   : 5.7355   Max.   : 3.4339  
+##   Eccentricity       ConvexArea      EquivDiameter         Extent       
+##  Min.   :-5.7819   Min.   :-1.1111   Min.   :-1.5516   Min.   :-3.9607  
+##  1st Qu.:-0.3801   1st Qu.:-0.5728   1st Qu.:-0.6421   1st Qu.:-0.6336  
+##  Median : 0.1472   Median :-0.2885   Median :-0.2472   Median : 0.2063  
+##  Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  
+##  3rd Qu.: 0.6475   3rd Qu.: 0.2863   3rd Qu.: 0.4458   3rd Qu.: 0.7562  
+##  Max.   : 1.7448   Max.   : 7.0359   Max.   : 5.3451   Max.   : 2.3726  
+##     Solidity          roundness        Compactness       ShapeFactor1     
+##  Min.   :-14.5689   Min.   :-6.4460   Min.   :-2.5811   Min.   :-3.35603  
+##  1st Qu.: -0.3160   1st Qu.:-0.6920   1st Qu.:-0.6059   1st Qu.:-0.58838  
+##  Median :  0.2446   Median : 0.1659   Median : 0.0229   Median : 0.07231  
+##  Mean   :  0.0000   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.00000  
+##  3rd Qu.:  0.6159   3rd Qu.: 0.7323   3rd Qu.: 0.5575   3rd Qu.: 0.62749  
+##  Max.   :  1.6167   Max.   : 1.9725   Max.   : 3.0373   Max.   : 3.44642  
+##   ShapeFactor2       ShapeFactor3       ShapeFactor4     
+##  Min.   :-1.93292   Min.   :-2.35617   Min.   :-10.8500  
+##  1st Qu.:-0.94387   1st Qu.:-0.62863   1st Qu.: -0.3116  
+##  Median :-0.03762   Median :-0.01562   Median :  0.3029  
+##  Mean   : 0.00000   Mean   : 0.00000   Mean   :  0.0000  
+##  3rd Qu.: 0.76244   3rd Qu.: 0.52948   3rd Qu.:  0.6457  
+##  Max.   : 3.27086   Max.   : 3.34535   Max.   :  1.0693
+\end{verbatim}
+
+\hypertarget{realize-a-seleuxe7uxe3o-de-caracteruxedsticas-correlauxe7uxe3o.-plote-o-gruxe1fico-de-correlauxe7uxe3o.-liste-as-caracteruxedsticas-que-foram-removidas.}{%
+\subsubsection{5.Realize a seleção de características (correlação).
+Plote o gráfico de correlação. Liste as características que foram
+removidas.}\label{realize-a-seleuxe7uxe3o-de-caracteruxedsticas-correlauxe7uxe3o.-plote-o-gruxe1fico-de-correlauxe7uxe3o.-liste-as-caracteruxedsticas-que-foram-removidas.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.92 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dadosCorrelacao }\OtherTok{=} \FunctionTok{cor}\NormalTok{(dados[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{])}
+\FunctionTok{corrplot.mixed}\NormalTok{(dadosCorrelacao,}\AttributeTok{lower.col =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlacaoAlta }\OtherTok{=} \FunctionTok{findCorrelation}\NormalTok{(dadosCorrelacao, }\AttributeTok{cutoff=}\FloatTok{0.95}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(correlacaoAlta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 2 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dadosCorrelacao }\OtherTok{=} \FunctionTok{cor}\NormalTok{(dados[,}\DecValTok{6}\SpecialCharTok{:}\DecValTok{11}\NormalTok{])}
+\FunctionTok{corrplot.mixed}\NormalTok{(dadosCorrelacao,}\AttributeTok{lower.col =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlacaoAlta }\OtherTok{=} \FunctionTok{findCorrelation}\NormalTok{(dadosCorrelacao, }\AttributeTok{cutoff=}\FloatTok{0.95}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(correlacaoAlta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dadosCorrelacao }\OtherTok{=} \FunctionTok{cor}\NormalTok{(dados[,}\DecValTok{12}\SpecialCharTok{:}\DecValTok{16}\NormalTok{])}
+\FunctionTok{corrplot.mixed}\NormalTok{(dadosCorrelacao,}\AttributeTok{lower.col =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlacaoAlta }\OtherTok{=} \FunctionTok{findCorrelation}\NormalTok{(dadosCorrelacao, }\AttributeTok{cutoff=}\FloatTok{0.95}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(correlacaoAlta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\hypertarget{plote-um-gruxe1fico-boxplot-ou-de-densidade-por-variuxe1vel-x-classe-organize-em-3-colunas.-discuta-qual-uxe9-a-variuxe1vel-que-teria-maior-poder-de-discriminauxe7uxe3o-existe-alguma-classe-que-pode-ser-classificada-mais-facilmente-justifique-a-sua-escolha.}{%
+\subsubsection{6.Plote um gráfico boxplot ou de densidade por variável x
+classe (organize em 3 colunas). Discuta qual é a variável que teria
+maior poder de discriminação? Existe alguma classe que pode ser
+classificada mais facilmente? Justifique a sua
+escolha.}\label{plote-um-gruxe1fico-boxplot-ou-de-densidade-por-variuxe1vel-x-classe-organize-em-3-colunas.-discuta-qual-uxe9-a-variuxe1vel-que-teria-maior-poder-de-discriminauxe7uxe3o-existe-alguma-classe-que-pode-ser-classificada-mais-facilmente-justifique-a-sua-escolha.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cores }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{,}\StringTok{"darkred"}\NormalTok{,}\StringTok{"black"}\NormalTok{,}\StringTok{"brown"}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{) \{}
+\FunctionTok{boxplot}\NormalTok{(dados[,i] }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dados}\SpecialCharTok{$}\NormalTok{Class, }\AttributeTok{col=}\NormalTok{cores, }\AttributeTok{xlab=}\StringTok{"Tipo de feijão"}\NormalTok{,}
+\AttributeTok{ylab=}\StringTok{""}\NormalTok{, }\AttributeTok{main=}\FunctionTok{names}\NormalTok{(dados)[i])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-1.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-2.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-3.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-4.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-5.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-17-6.pdf}
+
+\hypertarget{na-variuxe1vel-uxe1reaperimetermajoraxislengthminoraxislengthconvexareaequivdiametershapefactor1shapefactor2-pode-se-visualizar-um-maior-poder-de-discriminauxe7uxe3o-na-classe-bombay-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável
+Área,Perimeter,MajorAxisLength,MinorAxisLength,ConvexArea,EquivDiameter,ShapeFactor1,ShapeFactor2
+pode-se visualizar um maior poder de discriminação na classe BOMBAY
+porque a mediana da classe está fora das outras caixas e não sobrepõe as
+outras
+caixas.}\label{na-variuxe1vel-uxe1reaperimetermajoraxislengthminoraxislengthconvexareaequivdiametershapefactor1shapefactor2-pode-se-visualizar-um-maior-poder-de-discriminauxe7uxe3o-na-classe-bombay-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variuxe1vel-aspectration-possuuxed-duas-classes-com-grande-poder-de-discriminauxe7uxe3o-que-uxe9-a-seker-e-horoz-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável AspectRation possuí duas classes com grande
+poder de discriminação que é a SEKER e HOROZ porque a mediana da classe
+está fora das outras caixas e não sobrepõe as outras
+caixas.}\label{na-variuxe1vel-aspectration-possuuxed-duas-classes-com-grande-poder-de-discriminauxe7uxe3o-que-uxe9-a-seker-e-horoz-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variuxe1vel-eccentricity-a-classe-que-possuuxed-maior-poder-de-discriminauxe7uxe3o-uxe9-seker-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável Eccentricity a classe que possuí maior poder
+de discriminação é SEKER porque a mediana da classe está fora das outras
+caixas e não sobrepõe as outras
+caixas.}\label{na-variuxe1vel-eccentricity-a-classe-que-possuuxed-maior-poder-de-discriminauxe7uxe3o-uxe9-seker-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variuxe1vel-extent-a-classe-horoz-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-horoz-esta-fora-da-caixa-das-outras}{%
+\subsubsection{Na variável Extent a classe horoz possuí maior poder de
+discriminação porque a mediana da classe horoz esta fora da caixa das
+outras}\label{na-variuxe1vel-extent-a-classe-horoz-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-horoz-esta-fora-da-caixa-das-outras}}
+
+\hypertarget{na-variuxe1vel-solidity-a-classe-seker-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-estuxe1-fora-das-outras-caixas}{%
+\subsubsection{Na variável Solidity a classe SEKER possuí maior poder de
+discriminação porque a mediana está fora das outras
+caixas}\label{na-variuxe1vel-solidity-a-classe-seker-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-estuxe1-fora-das-outras-caixas}}
+
+\hypertarget{na-variuxe1vel-roundness-a-classe-seker-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável roundness a classe SEKER possuí maior poder
+de discriminação porque a mediana da classe está fora das outras caixas
+e não sobrepõe as outras
+caixas.}\label{na-variuxe1vel-roundness-a-classe-seker-possuuxed-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variuxe1vel-compactness-as-classes-seker-e-horoz-possuem-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável Compactness as classes Seker e Horoz possuem
+maior poder de discriminação porque a mediana da classe está fora das
+outras caixas e não sobrepõe as outras
+caixas.}\label{na-variuxe1vel-compactness-as-classes-seker-e-horoz-possuem-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variavuxe9l-shapefactor3-as-classes-seker-e-horoz-possuem-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variavél ShapeFactor3 as classes Seker e Horoz possuem
+maior poder de discriminação porque a mediana da classe está fora das
+outras caixas e não sobrepõe as outras
+caixas.}\label{na-variavuxe9l-shapefactor3-as-classes-seker-e-horoz-possuem-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\hypertarget{na-variuxe1vel-shapefactor4-a-classe-seker-possui-o-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}{%
+\subsubsection{Na variável ShapeFactor4 a classe Seker possui o maior
+poder de discriminação porque a mediana da classe está fora das outras
+caixas e não sobrepõe as outras
+caixas.}\label{na-variuxe1vel-shapefactor4-a-classe-seker-possui-o-maior-poder-de-discriminauxe7uxe3o-porque-a-mediana-da-classe-estuxe1-fora-das-outras-caixas-e-nuxe3o-sobrepuxf5e-as-outras-caixas.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{levels}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{Class))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "BARBUNYA" "BOMBAY"   "CALI"     "DERMASON" "HOROZ"    "SEKER"    "SIRA"
+\end{verbatim}
+
+\hypertarget{realize-a-projeuxe7uxe3o-do-dataset-utilizando-pca.-explique-as-caracteruxedsticas-dos-componentes-principais-estimados.-o-que-se-pode-explicar-sobre-os-componentes-principais-utilizando-o-gruxe1fico-biplot.-apresente-as-caracteruxedsticas-buxe1sicas-summary-dos-dados.}{%
+\subsubsection{7.Realize a projeção do dataset utilizando PCA. Explique
+as características dos componentes principais estimados. O que se pode
+explicar sobre os componentes principais utilizando o gráfico biplot.
+Apresente as características básicas (summary) dos
+dados.}\label{realize-a-projeuxe7uxe3o-do-dataset-utilizando-pca.-explique-as-caracteruxedsticas-dos-componentes-principais-estimados.-o-que-se-pode-explicar-sobre-os-componentes-principais-utilizando-o-gruxe1fico-biplot.-apresente-as-caracteruxedsticas-buxe1sicas-summary-dos-dados.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca }\OtherTok{=} \FunctionTok{prcomp}\NormalTok{(dados[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{], }\AttributeTok{center=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{scale=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Standard deviations (1, .., p=4):
+## [1] 1.72209904 1.01243835 0.07861298 0.05624484
+## 
+## Rotation (n x k) = (4 x 4):
+##                       PC1         PC2        PC3         PC4
+## Perimeter       0.5770908 -0.08987168  0.8107934  0.03877259
+## MajorAxisLength 0.5772849  0.09472639 -0.3657732 -0.72386392
+## MinorAxisLength 0.5094353 -0.47175145 -0.4420447  0.56791081
+## AspectRation    0.2723673  0.87200949 -0.1158468  0.38986539
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{biplot}\NormalTok{(pca,}\AttributeTok{xlabs =} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(dados[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{])))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.7221 1.0124 0.07861 0.05624
+## Proportion of Variance 0.7414 0.2563 0.00155 0.00079
+## Cumulative Proportion  0.7414 0.9977 0.99921 1.00000
+\end{verbatim}
+
+\hypertarget{o-gruxe1fico-biplot-uxe9-um-tipo-de-gruxe1fico-exploratuxf3rio-usado-em-estatuxedstica.-as-variuxe1veis-que-estuxe3o-exibidas-no-gruxe1fico-suxe3o-as-variuxe1veis-que-suxe3o-linearmente-correlacionadas.-e-os-componentes-visualizados-pelo-summary-explicam-a-variuxe2ncia-dos-dados-em-relauxe7uxe3o-ao-a-cada-autovetor.}{%
+\subsubsection{O Gráfico Biplot é um tipo de gráfico exploratório usado
+em estatística. As variáveis que estão exibidas no gráfico são as
+variáveis que são linearmente correlacionadas. E os componentes
+visualizados pelo summary explicam a variância dos dados em relação ao a
+cada
+autovetor.}\label{o-gruxe1fico-biplot-uxe9-um-tipo-de-gruxe1fico-exploratuxf3rio-usado-em-estatuxedstica.-as-variuxe1veis-que-estuxe3o-exibidas-no-gruxe1fico-suxe3o-as-variuxe1veis-que-suxe3o-linearmente-correlacionadas.-e-os-componentes-visualizados-pelo-summary-explicam-a-variuxe2ncia-dos-dados-em-relauxe7uxe3o-ao-a-cada-autovetor.}}
+
+\hypertarget{analise-o-dataset-projetado-com-o-auxuxedlio-do-gruxe1fico-de-boxplot-por-classe-igual-ao-do-item-6.-compare-com-o-resultado-do-item-6.-se-quiser-pode-gerar-um-gruxe1fico-de-espalhamento-para-auxiliar-na-explicauxe7uxe3o.}{%
+\subsubsection{8.Analise o dataset projetado com o auxílio do gráfico de
+boxplot por classe (igual ao do item 6). Compare com o resultado do item
+6. Se quiser, pode gerar um gráfico de espalhamento para auxiliar na
+explicação.}\label{analise-o-dataset-projetado-com-o-auxuxedlio-do-gruxe1fico-de-boxplot-por-classe-igual-ao-do-item-6.-compare-com-o-resultado-do-item-6.-se-quiser-pode-gerar-um-gruxe1fico-de-espalhamento-para-auxiliar-na-explicauxe7uxe3o.}}
+
+\hypertarget{pode-se-observar-que-quanto-maior-o-poder-de-discriminauxe7uxe3o-maior-uxe9-a-correlauxe7uxe3o.}{%
+\subsubsection{Pode-se observar que quanto maior o poder de
+discriminação, maior é a
+correlação.}\label{pode-se-observar-que-quanto-maior-o-poder-de-discriminauxe7uxe3o-maior-uxe9-a-correlauxe7uxe3o.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cores }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{,}\StringTok{"darkred"}\NormalTok{,}\StringTok{"black"}\NormalTok{,}\StringTok{"brown"}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{) \{}
+\FunctionTok{boxplot}\NormalTok{(dados[,i] }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dados}\SpecialCharTok{$}\NormalTok{Class, }\AttributeTok{col=}\NormalTok{cores, }\AttributeTok{xlab=}\StringTok{"Tipo de feijão"}\NormalTok{,}
+\AttributeTok{ylab=}\StringTok{""}\NormalTok{, }\AttributeTok{main=}\FunctionTok{names}\NormalTok{(dados)[i])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-1.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-2.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-3.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-4.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-5.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-22-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GGally)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'GGally':
+##   method from   
+##   +.gg   ggplot2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{7}\SpecialCharTok{:}\DecValTok{9}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{10}\SpecialCharTok{:}\DecValTok{12}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{13}\SpecialCharTok{:}\DecValTok{15}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggpairs}\NormalTok{(dados[,}\DecValTok{15}\SpecialCharTok{:}\DecValTok{17}\NormalTok{],}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{dados}\SpecialCharTok{$}\NormalTok{Class,}\AttributeTok{alpha=}\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+\hypertarget{uxe9-possuxedvel-reduzir-a-dimensionalidade-dos-dados-explique-como}{%
+\subsubsection{9.É possível reduzir a dimensionalidade dos dados?
+Explique
+como!}\label{uxe9-possuxedvel-reduzir-a-dimensionalidade-dos-dados-explique-como}}
+
+\hypertarget{sim-uxe9-possuxedvel-reduzir-a-dimensionalidade-dos-dados.-a-reduuxe7uxe3o-pode-ser-obtida-por-meio-da-remouxe7uxe3o-de-informauxe7uxf5es-irrelevantesredundantes-ou-uma-representauxe7uxe3o-compacta-e-informativa-dos-dados-originais.-o-mapeamento-das-entradas-em-um-espauxe7o-original-de-d-dimensuxf5es-uxe9-realizado-para-um-novo-espauxe7o-com-dimensuxf5es-k-onde-k-d-com-uma-perda-muxednima-de-informauxe7uxf5es.}{%
+\subsubsection{Sim é possível reduzir a dimensionalidade dos dados. A
+redução pode ser obtida por meio da remoção de informações
+irrelevantes/redundantes ou uma representação compacta e informativa dos
+dados originais. O mapeamento das entradas em um espaço original de d
+dimensões é realizado para um novo espaço com dimensões k (onde k
+\textless d), com uma perda mínima de
+informações.}\label{sim-uxe9-possuxedvel-reduzir-a-dimensionalidade-dos-dados.-a-reduuxe7uxe3o-pode-ser-obtida-por-meio-da-remouxe7uxe3o-de-informauxe7uxf5es-irrelevantesredundantes-ou-uma-representauxe7uxe3o-compacta-e-informativa-dos-dados-originais.-o-mapeamento-das-entradas-em-um-espauxe7o-original-de-d-dimensuxf5es-uxe9-realizado-para-um-novo-espauxe7o-com-dimensuxf5es-k-onde-k-d-com-uma-perda-muxednima-de-informauxe7uxf5es.}}
+
+\hypertarget{analise-o-dataset-reduzido-com-o-auxuxedlio-do-gruxe1fico-de-boxplot-por-classe-igual-ao-do-item-6.-compare-com-o-resultado-do-item-6-e-do-item-8.-se-quiser-pode-gerar-um-gruxe1fico-de-espalhamento-para-auxiliar-na-explicauxe7uxe3o.}{%
+\subsubsection{10.Analise o dataset reduzido com o auxílio do gráfico de
+boxplot por classe (igual ao do item 6). Compare com o resultado do item
+6 e do item 8. Se quiser, pode gerar um gráfico de espalhamento para
+auxiliar na
+explicação.}\label{analise-o-dataset-reduzido-com-o-auxuxedlio-do-gruxe1fico-de-boxplot-por-classe-igual-ao-do-item-6.-compare-com-o-resultado-do-item-6-e-do-item-8.-se-quiser-pode-gerar-um-gruxe1fico-de-espalhamento-para-auxiliar-na-explicauxe7uxe3o.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nComp }\OtherTok{=} \DecValTok{3}
+\NormalTok{dadosReduzidos }\OtherTok{=} \FunctionTok{predict}\NormalTok{(pca, dados)[,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nComp]}
+\FunctionTok{summary}\NormalTok{(dadosReduzidos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       PC1               PC2               PC3          
+##  Min.   :-2.8129   Min.   :-3.4351   Min.   :-0.31683  
+##  1st Qu.:-1.2870   1st Qu.:-0.5699   1st Qu.:-0.03773  
+##  Median :-0.4688   Median :-0.0226   Median :-0.01526  
+##  Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.00000  
+##  3rd Qu.: 1.0646   3rd Qu.: 0.4367   3rd Qu.: 0.01140  
+##  Max.   : 8.7164   Max.   : 3.4504   Max.   : 0.90290
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cores }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{,}\StringTok{"darkred"}\NormalTok{,}\StringTok{"black"}\NormalTok{,}\StringTok{"brown"}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{) \{}
+\FunctionTok{boxplot}\NormalTok{(dados[,i] }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dados}\SpecialCharTok{$}\NormalTok{Class, }\AttributeTok{col=}\NormalTok{cores, }\AttributeTok{xlab=}\StringTok{"Tipo de feijão"}\NormalTok{,}
+\AttributeTok{ylab=}\StringTok{""}\NormalTok{, }\AttributeTok{main=}\FunctionTok{names}\NormalTok{(dados)[i])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-1.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-2.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-3.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-4.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-5.pdf}
+\includegraphics{TarefaDois_files/figure-latex/unnamed-chunk-31-6.pdf}
+
+\hypertarget{pode-se-observar-que-quanto-maior-o-poder-de-discriminauxe7uxe3o-maior-uxe9-a-correlauxe7uxe3o.-1}{%
+\subsubsection{Pode-se observar que quanto maior o poder de
+discriminação, maior é a
+correlação.}\label{pode-se-observar-que-quanto-maior-o-poder-de-discriminauxe7uxe3o-maior-uxe9-a-correlauxe7uxe3o.-1}}
+
+\hypertarget{apuxf3s-ter-analisado-estas-informauxe7uxf5es-quais-considerauxe7uxf5es-vocuxea-faz-sobre-este-conjunto-de-dados-ou-tarefa}{%
+\subsubsection{11. Após ter analisado estas informações, quais
+considerações você faz sobre este conjunto de dados (ou
+tarefa)?}\label{apuxf3s-ter-analisado-estas-informauxe7uxf5es-quais-considerauxe7uxf5es-vocuxea-faz-sobre-este-conjunto-de-dados-ou-tarefa}}
+
+\hypertarget{esse-conjunto-de-dados-dataset-drybeans-em-complemento-a-tarefa-1-foi-possuxedvel-observar-a-relauxe7uxe3o-com-os-gruxe1ficos-de-espalhamento-correlauxe7uxe3o-e-boxplot-com-o-poder-de-discriminauxe7uxe3o.-foi-possuxedvel-visualizar-as-informauxe7uxf5es-obtidas-padruxf5es-e-comportamento-das-informauxe7uxf5es-atravuxe9s-dos-gruxe1ficos.}{%
+\subsubsection{Esse conjunto de dados (dataset) DryBeans em complemento
+a tarefa 1 foi possível observar a relação com os gráficos de
+espalhamento (correlação) e boxplot (com o poder de discriminação). Foi
+possível visualizar as informações obtidas, padrões e comportamento das
+informações através dos
+gráficos.}\label{esse-conjunto-de-dados-dataset-drybeans-em-complemento-a-tarefa-1-foi-possuxedvel-observar-a-relauxe7uxe3o-com-os-gruxe1ficos-de-espalhamento-correlauxe7uxe3o-e-boxplot-com-o-poder-de-discriminauxe7uxe3o.-foi-possuxedvel-visualizar-as-informauxe7uxf5es-obtidas-padruxf5es-e-comportamento-das-informauxe7uxf5es-atravuxe9s-dos-gruxe1ficos.}}
+
+\end{document}

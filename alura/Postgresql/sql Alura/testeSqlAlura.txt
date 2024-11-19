@@ -1,0 +1,202 @@
+CREATE TABLE aluno(
+	id SERIAL,
+	nome VARCHAR(255),
+	cpf CHAR(11),
+	observacao TEXT,
+	idade INTEGER,
+	dinheiro NUMERIC(10,2),
+	altura REAL,
+	ativo BOOLEAN,
+	data_nascimento DATE,
+	hora_aula TIME,
+	matriculado_em TIMESTAMP
+	
+	
+);
+select * from aluno;
+
+INSERT INTO aluno (nome,cpf,observacao,idade,dinheiro,altura,ativo,data_nascimento,hora_aula,matriculado_em) 
+VALUES('Diogo',
+	   '1234567901',
+	   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam arcu enim, convallis eu tempus sed, pulvinar et metus. Ut nunc mi, accumsan et fermentum et, vulputate quis lectus. Integer sit amet sapien sem. Vivamus lacinia porttitor magna, vitae tincidunt lorem dapibus et. Pellentesque non justo purus. Sed imperdiet, tellus quis imperdiet convallis, neque risus facilisis velit, et dictum ex augue id nisl. Suspendisse in sagittis arcu. Integer eget semper lectus. Phasellus elementum, tortor ut vulputate dapibus, nibh risus volutpat leo, nec placerat dolor nunc id elit. Morbi porttitor tincidunt sem, sed dictum libero rhoncus ut. Curabitur rhoncus leo risus, ac ultrices justo dictum eu. Suspendisse potenti. Aenean suscipit molestie quam, et cursus sapien aliquet sit amet.
+
+Fusce ultrices lacinia tortor vel aliquam. Maecenas facilisis non arcu in tincidunt. Aenean eget neque sed lorem pellentesque dignissim. Nullam imperdiet tortor sed purus facilisis rhoncus. Integer nec lacus quam. Etiam et viverra libero. Proin dictum, justo pretium lacinia bibendum, odio eros semper lorem, ac imperdiet leo mauris non enim. Proin consectetur diam non odio tempus, finibus accumsan enim euismod. Ut condimentum ac ligula sit amet efficitur. Proin venenatis erat ultrices orci consectetur, quis convallis turpis aliquet.
+
+Nulla vitae mauris et purus porttitor lobortis sit amet aliquet dui. Nunc ut sagittis enim, a cursus massa. In viverra ante sed tortor dictum euismod. Duis elementum porttitor euismod. Mauris justo dui, rhoncus a turpis in, efficitur feugiat leo. Suspendisse potenti. Donec eleifend efficitur sapien, varius malesuada augue. Nam in dictum nisi. Fusce nec rutrum erat. Mauris lacinia neque consectetur enim sollicitudin, ac rhoncus ligula iaculis.
+
+Praesent suscipit dolor nunc. Aenean accumsan a ex id vulputate. Cras ullamcorper dui non massa facilisis pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus tincidunt convallis aliquam. Integer id leo a nulla elementum vulputate. Cras sed sem mi.
+
+Proin feugiat elementum molestie. Phasellus ut aliquet magna. Fusce et dolor a eros imperdiet viverra vitae id arcu. Quisque nec risus nec leo malesuada malesuada at a magna. Maecenas dapibus faucibus turpis, eu auctor tellus pharetra in. In ullamcorper nisi velit, sit amet imperdiet turpis facilisis a. Praesent eget dui id elit pellentesque egestas sed sed risus. Praesent porttitor interdum dolor et fringilla. Cras vel risus non lectus consectetur euismod. Maecenas eget tincidunt massa, sit amet aliquam metus. Aliquam consequat dui eu augue dictum sodales. Donec vehicula vel nunc nec feugiat.',
+	 35,
+	 100.50,
+	   1.81,
+	   TRUE,
+	   '1984-08-27',
+	   '17:38:00',
+	   '2022-07-28 12:35:45'
+	   
+	  );
+
+SELECT * FROM aluno WHERE id=1;
+
+UPDATE aluno SET nome = 'Nico',
+cpf = '12345678910',
+observacao= 'Teste',
+idade = 38,
+dinheiro= 15.22,
+altura=1.90,
+ativo= FALSE,
+data_nascimento='1990-01-15',
+hora_aula='13:15:21',
+matriculado_em='2020-01-14 13:14:32'
+WHERE id=1;
+
+
+
+SELECT * FROM aluno WHERE nome='Nico';
+DELETE FROM aluno WHERE nome='Nico';
+UPDATE aluno SET id=1 WHERE id=2;
+SELECT nome AS "Nome do Aluno",cpf,matriculado_em AS quando_se_matriculou 
+FROM aluno;
+
+INSERT INTO aluno (nome) VALUES ('Vinicius Dias');
+INSERT INTO aluno (nome) VALUES ('Nico Steppat');
+INSERT INTO aluno (nome) VALUES ('João Roberto');
+INSERT INTO aluno (nome) VALUES ('Diego');
+ 
+ 
+SELECT nome,cpf FROM aluno WHERE nome<>'Diogo';
+
+SELECT * FROM aluno WHERE nome LIKE 'Di_go';
+SELECT * FROM aluno WHERE nome NOT LIKE 'Di_go';
+SELECT * FROM aluno WHERE nome LIKE 'D%';
+SELECT * FROM aluno WHERE nome LIKE '%i%a%';
+
+
+SELECT * FROM aluno WHERE cpf IS NOT NULL;
+
+SELECT * FROM aluno WHERE idade!=36;
+
+UPDATE aluno SET idade =1 WHERE idade IS NULL;
+UPDATE aluno SET idade =45 WHERE nome LIKE '%i%a%';
+
+SELECT * FROM aluno WHERE idade BETWEEN 30 AND 50;
+
+
+SELECT * FROM aluno WHERE nome LIKE 'D%' AND cpf IS NOT NULL;
+
+SELECT * FROM aluno WHERE 
+nome LIKE 'D%' 
+OR  nome LIKE 'Nico%'
+OR nome LIKE 'Rodrigo';
+
+
+
+	CREATE TABLE curso(
+	id INTEGER ,
+	nome VARCHAR(255)
+	);
+	
+SELECT * FROM curso;
+INSERT INTO curso(id,nome) VALUES(NULL,NULL);
+DROP TABLE curso;
+CREATE TABLE curso(
+	id INTEGER NOT NULL,
+	nome VARCHAR(255) NOT NULL
+	);
+INSERT INTO curso(id,nome) VALUES(1,'Java');
+INSERT INTO curso(id,nome) VALUES(2,'HTML');
+
+CREATE TABLE curso(
+	id INTEGER NOT NULL UNIQUE,
+	nome VARCHAR(255) NOT NULL
+	);
+
+CREATE TABLE curso(
+	id INTEGER PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL
+	);
+
+DROP TABLE aluno;
+CREATE TABLE aluno (
+ id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL
+);
+
+INSERT INTO aluno(nome) VALUES('Diogo');
+INSERT INTO aluno(nome) VALUES('Vinicius');
+CREATE TABLE aluno_curso(
+aluno_id INTEGER ,
+	curso_id INTEGER,
+	PRIMARY KEY(aluno_id,curso_id)
+	
+);
+DROP TABLE aluno_curso;
+INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(1,1);
+INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(1,2);
+INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(2,2);
+INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(2,1);
+---INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(3,1);
+---INSERT INTO aluno_curso(aluno_id,curso_id) VALUES(2,2);
+CREATE TABLE aluno_curso(
+	aluno_id INTEGER ,
+	curso_id INTEGER,
+	PRIMARY KEY(aluno_id,curso_id),
+	FOREIGN KEY(aluno_id) REFERENCES aluno(id),
+	FOREIGN KEY(curso_id) REFERENCES curso(id)
+);
+SELECT * FROM aluno_curso;
+select * from aluno;
+select * from curso;
+
+SELECT * FROM aluno
+JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+JOIN curso ON curso.id=aluno_curso.curso_id ORDER BY 1
+;
+SELECT aluno.nome AS aluno_nome,aluno.id,curso.nome as curso_nome,curso.id FROM aluno
+JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+JOIN curso ON curso.id=aluno_curso.curso_id ORDER BY 1
+;
+insert into aluno(nome) values('Mauricio');
+select * from aluno;
+select * from CURSO;
+INSERT INTO curso(id,nome) values (3,'CSS');
+SELECT aluno.nome AS aluno_nome,curso.nome as curso_nome FROM aluno
+LEFT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+LEFT JOIN curso ON curso.id=aluno_curso.curso_id ORDER BY 1
+;
+
+SELECT aluno.nome AS aluno_nome,curso.nome as curso_nome FROM aluno
+RIGHT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+RIGHT JOIN curso ON curso.id=aluno_curso.curso_id ORDER BY 1
+;
+
+SELECT aluno.nome AS aluno_nome,curso.nome as curso_nome FROM aluno
+FULL JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+FULL JOIN curso ON curso.id=aluno_curso.curso_id ORDER BY 1
+;
+
+SELECT aluno.nome AS aluno_nome,curso.nome as curso_nome FROM aluno 
+CROSS JOIN curso;
+
+DELETE FROM aluno where id=1;
+DROP TABLE aluno_curso;
+SELECT * FROM ALUNO;
+CREATE TABLE aluno_curso(
+	aluno_id INTEGER ,
+	curso_id INTEGER,
+	PRIMARY KEY(aluno_id,curso_id),
+	FOREIGN KEY(aluno_id) REFERENCES aluno(id) 
+	ON DELETE CASCADE 
+	ON UPDATE CASCADE,
+	FOREIGN KEY(curso_id) REFERENCES curso(id)
+);
+
+UPDATE aluno SET id=10 WHERE id=2;
+
+select * from aluno ORDER BY nome DESC;
+SELECT * FROM aluno order by 1;  ---campo id
+
+SELECT COUNT(*) FROM aluno;
+
+SELECT * FROM aluno ORDER BY nome DESC LIMIT 4 OFFSET 2;

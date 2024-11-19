@@ -1,0 +1,43 @@
+img.imagemBlueBerry{
+width: 150px;
+height: 150px;
+/*border: 1px solid black;*/
+padding: 30px;
+}
+.paragrafoTitulo{
+    font-size: 30px;
+    text-align: center;
+    background-color: rgb(211, 164, 164);
+    padding: 70px;
+    
+}
+.paragrafoTexto{
+    font-weight: 120%;
+    margin-left: 550px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    width: 250px;
+    padding: 20px;
+    
+    
+}
+div{
+    
+    text-align: center;
+    border-radius: 1000px;
+    
+    background-color: aqua;
+}
+
+#tamanhoPreco{
+    font-size: 30px;
+    font-style: bolder;
+}
+a:link{
+    color:black;
+}
+a:visited{
+    color:red;
+}
+a:hover{
+    color:rgb(102, 102, 19);
+}

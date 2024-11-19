@@ -1,0 +1,2 @@
+Os códigos descritos nesta pasta referem-se a atividade do livro Head First C 
+na qual deve-se testar os códigos para ver os erros.

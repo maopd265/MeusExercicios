@@ -1,0 +1,218 @@
+---
+title: "Lab 3"
+author: "Adami / Notari"
+date: "16/09/2022"
+output: 
+  html_document: 
+    fig_width: 9
+    fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '~/Computacao Aplicada I')
+```
+
+```{r Carga dos Pacotes,echo=FALSE, message=FALSE, warning=FALSE}
+library(gridExtra)
+library(ggplot2)
+library(lubridate)
+library(caret)
+library(corrplot)
+library(GGally) 
+```
+
+## 1. Carga dos Dados
+
+```{r Carga dos dados}
+dados = read.csv("prep-dados.txt",header=T,na.strings="?")
+summary(dados)
+```
+
+## 2. Remoção dos valores faltantes
+
+Como existem valores faltantes no dataset, as linhas (amostras) serão removidas. 
+
+```{r}
+colSums(is.na(dados))
+dados = na.omit(dados)
+summary(dados)
+```
+
+## 3. Remoção de Outliers 
+
+O gráfico abaixo mostra o boxplot de cada variável da base de dados.
+
+```{r}
+p = list()
+for (i in 2:6) {
+  p[[i-1]] = ggplot(dados, aes_string(y=names(dados)[i])) + geom_boxplot(fill = i) + 
+    theme(legend.position="none")
+}
+do.call(grid.arrange,c(p,ncol=5))
+```
+
+Remoção dos outliers utilizando o método de Tukey. 
+
+```{r}
+outliers = c()
+for (i in 2:6) {
+  outliers = c(outliers,which(dados[,i] %in% boxplot.stats(dados[,i])$out))
+}
+outliers = unique(outliers) # remoção dos índices duplicados
+dados = dados[-outliers,]
+```
+
+## 4. Transformação das variáveis
+
+Conversão da variável em um fator (rótulos "Não Ocupado" e "Ocupado")
+
+```{r}
+dados$Occupancy = factor(dados$Occupancy, labels=c("Não Ocupado","Ocupado"))
+```
+
+Criação das variáveis minutos corridos no dia e o dia do mês a partir da variável *date*
+
+```{r}
+# converter a string em uma representação interna
+dados$date    = ymd_hms(dados$date) 
+# Adicionar uma coluna chamada Minutos com os minutos corridos do dia
+dados$Minutos = int_length(interval(date(dados$date),dados$date)) / 60.0 
+# Adicionar uma coluna chamada DiaMes com o dia do mês
+dados$DiaMes = day(date(dados$date))
+dados$date = NULL
+```
+
+## 5. Normalização dos dados  
+Separação dos dados e rótulo em duas estruturas para facilitar a sua manipulação
+
+```{r}
+rotulos = dados[,6] 
+dados = dados[,-6] 
+```
+
+Cálculo das estatísticas necessárias para a normalização: media e desvio padrão
+
+```{r}
+
+normalizacaoParametros = preProcess(dados,method = c("center","scale"))
+```
+
+Aplicação da normalização utilizando as estatísticas estimadas a partir dos dados
+
+```{r}
+dados = predict(normalizacaoParametros, dados)
+summary(dados)
+```
+
+## 6. Seleção das características 
+
+Cálculo da matriz de correlação
+
+```{r}
+matrizCorrelacao = cor(dados)
+```
+
+Visualização da correlação
+
+```{r  message=FALSE}
+corrplot.mixed(matrizCorrelacao,lower.col="black")
+``` 
+
+Estimação das dimensões que possuem correlação acima de 0.95 (fortemente)
+
+```{r}
+indicesCorrelacaoForte = findCorrelation(matrizCorrelacao, cutoff=0.95)
+```
+
+Remoção das variáveis que possuem correlação acima de 0.95 (com p-value < 0.05)
+
+```{r}
+if (length(indicesCorrelacaoForte) > 0)
+  dados[,indicesCorrelacaoForte] = NULL
+``` 
+
+## 7. Redução de dimensionalidade
+
+Cálculo da matriz de projeção estimada a partir dos autovetores da covariância
+
+```{r}
+pca = prcomp(dados,center=TRUE,scale=TRUE)
+pca$rotation
+```
+
+Analisando os autovetores, pode-se verificar que o primeiro componente principal possui uma influência das variáveis *Temperature*, *Light*  e *CO2*. A variável *DiaMes* também possui uma influência (inversa) no primeiro componente e a maior influência no terceiro componente.
+
+A influência pode ser visualizada pelo gráfico biplot
+
+```{r}
+biplot(pca,xlabs = rep("", nrow(dados)))
+```
+Analisando os autovetores (biplot), pode-se verificar que:
+
+* As variáveis *Temperature*, *Light*  e *CO2* são as que influenciam mais no componente principal 1. Podem-se dizer que as maiores medidas permitem discriminar melhor as classes. 
+* As variáveis *Light*  e *CO2* são altamente correlacionadas, pois o ângulo entre elas é muito pequeno.
+* As variáveis *HumidityRatio*  e *DiaMes* são as que influenciam mais no componente principal 2.
+* A variável *DiaMes* influencia os dois primeiros componentes principais, mas de forma inversa no primeiro componente.
+
+Avaliar o quanto de cada variação dos dados é explicada em cada autovetor
+```{r}
+summary(pca) 
+``` 
+A linha *Cumulative Proportion* estima a variância acumulada que explica os dados
+
+
+O quanto cada autovetor explica a variância
+```{r}
+pca_var = pca$sdev^2
+proporcao_var = pca_var/sum(pca_var)
+
+ggplot(data=NULL,aes(x=1:length(proporcao_var),y=proporcao_var,fill=1:length(proporcao_var)))+geom_bar(stat='identity')+theme(legend.position="none")+labs(x = "Componente Principal", y ="Proporção da Variância Explicada")
+```
+
+Seleção dos autovetores que explicam pelo menos 95% da variância dos dados
+```{r}
+numeroComponentes = min(which(summary(pca)$importance[3,] > 0.95))
+```
+
+Projetar os dados no novo sistema de coordenadas, mas com a dimensão reduzida
+```{r}
+dados = predict(pca,dados)[,1:numeroComponentes]
+dados = data.frame(dados)
+```
+
+## 8. Gráfico das amostras por classe
+
+Pode-se verificar um desbalanço no número de amostras das classes
+
+```{r}
+ggplot(data.frame(rotulos),aes(rotulos,fill=rotulos)) + 
+  geom_bar()+theme(legend.position="none")
+```
+
+A distribuição dos dados por variável
+
+```{r}
+p = list()
+for(i in 1:(ncol(dados))) {
+  p[[i]] = ggplot(dados, aes_string(x=rotulos, y=names(dados)[i],  fill=rotulos)) + geom_boxplot() + theme(axis.title.x=element_blank(),legend.position="none")
+}
+do.call(grid.arrange,c(p,ncol=3))
+``` 
+
+
+```{r}
+p = list()
+for(i in 1:(ncol(dados))){
+  p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],  fill=rotulos)) + geom_density(alpha=0.5,color="darkgray")+ theme(legend.position="top")
+}
+do.call(grid.arrange,c(p,ncol=3))
+``` 
+
+
+Gráfico de Espalhamento separando as classes 
+
+```{r Espalhamento, message=FALSE}
+ggpairs(dados,aes(colour=rotulos, alpha=0.4))
+```
+

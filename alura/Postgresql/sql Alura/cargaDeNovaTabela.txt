@@ -1,0 +1,17 @@
+SELECT * FROM testeupdate.cidade;
+
+
+SELECT * FROM testeupdate.cidaderegiao;
+
+DELETE FROM testeupdate.cidaderegiao;
+INSERT INTO testeupdate.cidaderegiao(nome,estado,regiao)  
+SELECT nome,estado,regiao FROM testeupdate.cidade 
+WHERE estado='Rio Grande do Norte';
+
+
+----UPDATE FUNCIONA MAS SÓ ATUALIZA COM O NÚMERO DE REGISTROS QUE CONTÉM A TABELA
+UPDATE testeupdate.cidaderegiao 
+SET nome= testeupdate.cidade.nome,
+estado= testeupdate.cidade.estado,
+regiao= testeupdate.cidade.regiao
+FROM testeupdate.cidade;

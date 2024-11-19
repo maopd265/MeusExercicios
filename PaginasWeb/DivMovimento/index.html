@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .divContainerRed{
+            display: flex;
+            background: red;
+
+        }
+        .divContainerBlue{
+            display: flex;
+            background: blue;
+
+        }
+        .divLeft{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: relative;
+            animation: mymove 5s infinite;
+        }
+        @keyframes mymove{
+             from{left:0px;}
+             to {left:300px;}
+        }
+        .divRight{
+            width: 100px;
+            height: 100px;
+            background: blue;
+            position: relative;
+            animation: mymoveRight 5s infinite;
+        }
+        @keyframes mymoveRight{
+             from{left:300px;}
+             to {left:0px;}
+        }
+        body{
+            margin: 0px;
+        }
+        /* pre{
+            white-space: nowrap;
+        } */
+    </style>
+</head>
+<body>
+    <div class="divContainerRed">
+    <h1>INTERNACIONAL</h1>
+    <div class="divLeft">
+       <img src="Scinternacional1909.png" alt="Internacional"  width="100px" height="100px">
+    </div>
+</div>
+    <div class="divContainerBlue">
+    <h1><strong>GRÊMIO</strong></h1>
+    <div class="divRight">
+        <img src="Gremio_logo.svg" alt="Grêmio" width="100px" height="100px">
+    </div>
+</div>
+    <pre>
+        |--------Placar---------|
+        | INTERNACIONAL : 1      | 
+        | GRÊMIO        : 0      |
+        -------------------------
+
+    </pre>
+    
+    
+
+</body>
+</html>

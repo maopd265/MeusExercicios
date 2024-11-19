@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geocodificação Reversa</title>
+</head>
+<body>
+  <h1>Obter Nome da Cidade a partir de Coordenadas</h1>
+  <script>
+    function showPosition(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+      
+      // Chamar a função para obter o nome da cidade
+      getCityName(latitude, longitude);
+    }
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          console.log("Usuário negou a solicitação de Geolocalização.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          console.log("Informações de localização não estão disponíveis.");
+          break;
+        case error.TIMEOUT:
+          console.log("A solicitação para obter a localização do usuário expirou.");
+          break;
+        case error.UNKNOWN_ERROR:
+          console.log("Um erro desconhecido ocorreu.");
+          break;
+      }
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      console.log("Geolocalização não é suportada pelo seu navegador.");
+    }
+
+    function getCityName(latitude, longitude) {
+      var url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          var city = data.address.city || data.address.town || data.address.village;
+          console.log("Nome da Cidade: " + city);
+        })
+        .catch(error => console.log("Erro ao obter o nome da cidade: " + error));
+    }
+  </script>
+</body>
+</html>

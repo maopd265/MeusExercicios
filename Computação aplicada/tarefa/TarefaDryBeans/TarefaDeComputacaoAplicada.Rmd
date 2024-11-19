@@ -1,0 +1,715 @@
+---
+title: "tarefaDryBean"
+output: html_document
+date: "2022-09-10"
+---
+
+###  1.Carregue a base de dados e mostre a estrutura do dataset (str()). Comente sobre o número de amostras, de variáveis (e seu tipo). O arquivo do dataset não pode ser modificado de forma alguma. A leitura deverá ser realizada de tal maneira qualquer característica dos dados. 
+```{r}
+setwd("C:\\Users\\Mauricio\\Desktop\\Material\\Atividades\\Computação aplicada")
+
+dados = read.csv("Dry_Bean_Dataset.csv",sep=";",dec=",")
+```
+
+
+```{r}
+str(dados)
+```
+
+
+
+```{r}
+##Para obter os nomes das colunas, deve-se utilizar a funÃ§Ã£o names()
+names(dados)
+
+#InformaÃ§Ãµes acerca das dimensÃµes da estrutura
+ncol(dados)
+nrow(dados)
+dim(dados)
+```
+
+
+```{r}
+for (i in 1:17) {
+  print(dados[0,i])
+}
+
+```
+
+
+
+### 2.Altere a variável do tipo do feijão (Class) para um factor. Utilizando um comando mostre como estimar o número de classes existentes.
+```{r}
+#print(dados$Class)
+dados$Class = factor(c(dados$Class))
+summary(dados$Class)
+length(summary(dados$Class))
+
+
+```
+
+### 3.Quantas amostras existem por classe? Use um gráfico de barras para ilustrar as quantidades.
+```{r}
+
+summary(dados$Class)
+ 
+```
+
+
+
+
+```{r}
+
+
+barplot(summary(dados$Class),names.arg = c("Brbnya", "Bombay", "Cali", "Dmason", "Horoz", "Seker", "Sira"),col="darkred")
+ 
+```
+```{r}
+#View(dados)
+#boxplot(summary(dados$Class))
+```
+## 4.Alguma variável apresenta outliers? Tem alguma que não apresenta? Se as amostras  com outliers fossem removidas, reduziria em quanto o número de amostras? Alguma classe sofreria uma redução maior do que a outra? Crie um boxplot por variável (boxplot()) para auxiliar na explicação. Não remova os outliers para as próximas etapas!
+
+
+### Resposta: Sim todas possuem outliers exceto as variaveis ShapeFactor2 e Class. 
+```{r}
+#boxplot com todas variaveis
+# boxplot(dados$Area)
+# boxplot(dados$Perimeter)
+# boxplot(dados$MajorAxisLength)
+# boxplot(dados$MinorAxisLength)
+# boxplot(dados$AspectRation)
+# boxplot(dados$Eccentricity)
+# boxplot(dados$ConvexArea)
+# boxplot(dados$EquivDiameter)
+# boxplot(dados$Extent)
+# boxplot(dados$Solidity)
+# boxplot(dados$roundness)
+# boxplot(dados$Compactness)
+# boxplot(dados$ShapeFactor1)
+# boxplot(dados$ShapeFactor2)
+# boxplot(dados$ShapeFactor3)
+# boxplot(dados$ShapeFactor4)
+# boxplot(dados$Class)
+
+```
+
+```{r}
+for (i in 1:17) {
+print(colnames(dados[i]))
+  
+}
+for (i in 1:17) {
+boxplot(dados[,colnames(dados[i])])
+  
+}
+
+```
+
+
+```{r}
+#variaveis sem outliers
+boxplot(dados$ShapeFactor2)
+boxplot(dados$Class)
+```
+
+
+
+
+### outliers  variavel Area
+```{r}
+outliers=which(dados$Area %in% boxplot.stats(dados$Area)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Area)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel Perimeter
+```{r}
+outliers=which(dados$Perimeter %in% boxplot.stats(dados$Perimeter)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Perimeter)-length(outliers)))
+#print(outliers)
+
+
+```
+
+
+
+### outliers da variavel MajorAxisLength
+```{r}
+outliers=which(dados$MajorAxisLength %in% boxplot.stats(dados$MajorAxisLength)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$MajorAxisLength)-length(outliers)))
+#print(outliers)
+```
+
+
+### outliers da variavel MinorAxisLength
+```{r}
+outliers=which(dados$MinorAxisLength %in% boxplot.stats(dados$MinorAxisLength)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$MinorAxisLength)-length(outliers)))
+#print(outliers)
+```
+
+### outliers da variavel AspectRation
+```{r}
+outliers=which(dados$AspectRation %in% boxplot.stats(dados$AspectRation)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$AspectRation)-length(outliers)))
+#print(outliers)
+```
+
+### outliers da variavel Eccentricity
+```{r}
+outliers=which(dados$Eccentricity %in% boxplot.stats(dados$Eccentricity)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Eccentricity)-length(outliers)))
+#print(outliers)
+```
+
+
+
+### outliers da variavel ConvexArea
+```{r}
+outliers=which(dados$ConvexArea %in% boxplot.stats(dados$ConvexArea)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$ConvexArea)-length(outliers)))
+#print(outliers)
+```
+
+### outliers da variavel EquivDiameter
+```{r}
+outliers=which(dados$EquivDiameter %in% boxplot.stats(dados$EquivDiameter)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$EquivDiameter)-length(outliers)))
+#print(outliers)
+```
+
+
+
+### outliers da variavel Extent
+```{r} 
+outliers=which(dados$Extent %in% boxplot.stats(dados$Extent)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Extent)-length(outliers)))
+#print(outliers)
+```
+
+
+### outliers da variavel Solidity
+```{r}
+outliers=which(dados$Solidity %in% boxplot.stats(dados$Solidity)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Solidity)-length(outliers)))
+#print(outliers)
+```
+
+### outliers da variavel roundness
+```{r}
+outliers=which(dados$roundness %in% boxplot.stats(dados$roundness)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$roundness)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel Compactness
+```{r}
+outliers=which(dados$Compactness %in% boxplot.stats(dados$Compactness)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Compactness)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel ShapeFactor1
+```{r}
+outliers=which(dados$ShapeFactor1 %in% boxplot.stats(dados$ShapeFactor1)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$ShapeFactor1)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel ShapeFactor2
+```{r}
+outliers=which(dados$ShapeFactor2 %in% boxplot.stats(dados$ShapeFactor2)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$ShapeFactor2)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel ShapeFactor3
+```{r}
+outliers=which(dados$ShapeFactor3 %in% boxplot.stats(dados$ShapeFactor3)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$ShapeFactor3)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel ShapeFactor4
+```{r}
+outliers=which(dados$ShapeFactor4 %in% boxplot.stats(dados$ShapeFactor4)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$ShapeFactor4)-length(outliers)))
+#print(outliers)
+```
+### outliers da variavel Class
+```{r}
+outliers=which(dados$Class %in% boxplot.stats(dados$Class)$out)
+print(paste("Total de outliers eh ",length(outliers)))
+print(paste("Sem os outliers ficaria com ",length(dados$Class)-length(outliers)))
+#print(outliers)
+```
+
+
+```{r}
+print(levels(dados$Class))
+```
+### 5. Utilizando um gráfico boxplot por variável x classe (organize em 3 colunas), diga qual é a variável que teria maior poder de discriminação? Justifique a sua escolha. 
+
+
+### Nas variaveis Area,Perimeter,MajorAxisLength,MinorAxisLength,ConvexArea,EquivDiameter,ShapeFactor1,ShapeFactor2 se destaca o feijão Bombay. 
+### Nas variavel AspectRation o maior poder de discriminação é no feijão Horoz. ### Nas variaveis Eccentricity,Solidity,roundness,Compactness,ShapeFactor3,ShapeFactor4 o maior poder de discriminação está no feijão Seker
+
+
+```{r}
+cores = c("red","green","blue","yellow","darkred","black","brown")
+par(mfrow=c(1,3))
+for (i in 1:16) {
+boxplot(dados[,i] ~ dados$Class, col=cores, xlab="Tipo de feijão",
+ylab="", main=names(dados)[i])
+}
+
+```
+
+
+
+### 6.Utilizando gráficos de densidade  por variável (organize em 3 colunas), é possível fazer alguma afirmação sobre a discriminabilidade de alguma classe? Pode utilizar os boxplots gerados na etapa anterior para auxiliar nas conclusões. 
+
+
+```{r}
+library(gridExtra)
+library(ggplot2)
+
+```
+
+```{r}
+
+p = list()
+for(i in 1:1){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="top", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=1))
+
+```
+```{r}
+
+p = list()
+for(i in 2:3){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="top", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+
+
+## Na variavel Área a classe Bombay possui densidade inferior em relação as outras classes
+
+
+
+
+```{r}
+
+p = list()
+for(i in 4:6){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+
+## Na variavel Perimeter a classe Bombay possui densidade inferior em relação as outras classes
+
+
+
+
+
+```{r}
+
+p = list()
+for(i in 7:9){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+
+## Na variavel MajorAxisLength a classe Bombay possui densidade inferior em relação as outras classes e Seker superior a todas as classes
+
+
+
+```{r}
+
+p = list()
+for(i in 10:12){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+## Na variavel MinorAxisLength a classe Sira possui densidade superior em relação as outras classes
+
+
+```{r}
+
+p = list()
+for(i in 13:15){
+p[[i]] = ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+theme(legend.position="", legend.title = element_blank())
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+## Na variavel AspectRation a classe Seker possui densidade superior em relação as outras classes
+
+
+
+
+
+## Na variavel Eccentricity a classe Seker possui densidade inferior em relação as outras classes e horroz superior 
+
+
+
+
+
+## Na variavel ConvexÁrea a classe Bombay possui densidade inferior em relação as outras classes
+
+
+
+
+## Na variavel EquivDiameter a classe Bombay possui densidade inferior em relação as outras classes
+
+
+
+
+## Na variavel Extent a classe Seker possui densidade superior em relação as outras classes
+
+
+
+
+## Na variavel Solidity a classe Barbunya possui densidade inferior em relação as outras classes e Seker superior
+
+
+
+
+## Na variavel roundness a classe Seker possui densidade superior em relação as outras classes
+
+
+
+
+
+
+
+## Na variavel ShapeFactor1 a classe Bombay possui densidade superior em relação as outras classes
+
+
+
+
+## Na variavel ShapeFactor2 a classe Bombay possui densidade diferente em relação as outras classes
+
+
+## Na variavel ShapeFactor3 a classe Seker possui densidade diferente em relação as outras classes
+
+
+```{r fig.width =10, fig.height = 10,fig.align='center'} 
+
+p = list()
+for(i in 16:16){
+p[[i]] =  ggplot(dados, aes_string(x=names(dados)[i],fill="Class")) +
+geom_density(alpha=0.5,color="darkgray") +
+  theme(axis.text.x = element_text(angle = 90, colour = "black", size = 8),legend.position="",legend.direction = "horizontal", legend.title = element_blank())
+
+}
+do.call(grid.arrange,c(p,ncol=3))
+
+```
+
+
+## Na variavel ShapeFactor4 a classe Seker possui densidade superior em relação as outras classes
+
+
+
+
+# 7.Algumas variável (por classe) possui uma distribuição normal (curva do sino)? É possível verificar numericamente se é verdade?
+
+
+### Seker
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="SEKER",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+```{r}
+ pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="SEKER",i])$p.value
+}
+barplot(pvalue,names.arg = names(dados)[1:16])
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+```
+
+### SIRA
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="SIRA",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+### ShapeFactor3 e EquivDiameter possuem distribuições normais
+
+
+### HOROZ
+
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="HOROZ",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+### DERMASON
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="DERMASON",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+
+
+
+
+### CALI
+
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="CALI",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+
+
+### BOMBAY
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="BOMBAY",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+### Perimeter, MajorAxisLength,AspectRation,EquivDiameter, roundness,Compactness e ShapeFactor1 possuem distribuição normal
+
+
+
+
+
+
+### BARBUNYA
+
+
+
+```{r}
+name=c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P")
+pvalue = c()
+for(i in 1:16){
+pvalue[i] = shapiro.test(dados[dados$Class=="BARBUNYA",i])$p.value
+}
+barplot(pvalue,names.arg = name)
+abline(h=0.05, col = "Red", lty = 5, lwd = 2)
+
+```
+
+
+
+### Perimeter,MajorAxisLength,AspectRation,EquivDiameter possuem distribuição normal
+
+
+
+
+
+
+```{r}
+summary(dados$Class)
+```
+
+```{r}
+class(dados$Class)
+```
+
+
+# 8.Utilizando um gráfico de dispersão entre pares de variáveis, diga se existe alguma associação entre variáveis que permite uma maior discriminação?
+
+
+### 
+
+
+
+
+```{r}
+pairs(dados[1:4], pch=(1:16)[dados$Class],
+col=c("black", "red", "blue","yellow")[dados$Class],
+lower.panel=NULL)
+par(xpd = TRUE)
+legend("bottomleft", legend=levels(dados$Class),
+col=c("black", "red", "blue","yellow"), pch=1:4)
+
+```
+
+
+```{r}
+pairs(dados[4:8], pch=(1:16)[dados$Class],
+col=c("black", "red", "blue","yellow")[dados$Class],
+lower.panel=NULL)
+par(xpd = TRUE)
+legend("bottomleft", legend=levels(dados$Class),
+col=c("black", "red", "blue","yellow","green","darkred","gray"), pch=4:8)
+
+```
+
+
+
+```{r}
+pairs(dados[8:12], pch=(1:16)[dados$Class],
+col=c("black", "red", "blue","yellow")[dados$Class],
+lower.panel=NULL)
+par(xpd = TRUE)
+legend("bottomleft", legend=levels(dados$Class),
+col=c("black", "red", "blue","yellow","green","darkred","gray"), pch=1:4)
+
+```
+
+
+```{r}
+pairs(dados[12:17], pch=(1:16)[dados$Class],
+col=c("black", "red", "blue","yellow")[dados$Class],
+lower.panel=NULL)
+par(xpd = TRUE)
+legend("bottomleft", legend=levels(dados$Class),
+col=c("black", "red", "blue","yellow","green","darkred","gray"), pch=1:4)
+
+```
+
+
+```{r}
+library(GGally)
+```
+
+
+```{r}
+
+
+ggpairs(dados[,1:3],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+
+```{r}
+
+
+ggpairs(dados[,4:6],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+
+```{r}
+
+
+ggpairs(dados[,7:9],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,10:12],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,13:15],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+```{r}
+
+
+ggpairs(dados[,15:17],aes(colour=dados$Class,alpha=0.4))
+
+```
+
+### 9.Após ter analisado estas informações, quais considerações você faz sobre este conjunto de dados (ou tarefa)?
+```{r}
+print("Analisando as informações obtidas no dataset Dry_Bean_Dataset.csv pode-se  visualizar as informações obtidas, padrões e comportamento das informações através dos gráficos.")
+
+```
+
+
+

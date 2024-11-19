@@ -1,0 +1,227 @@
+SELECT CONCAT(aluno.primeiro_nome,' ',aluno.ultimo_nome) AS nome_completo,curso.nome as nome_do_curso FROM aluno 
+JOIN aluno_curso ON aluno_curso.aluno_id=aluno.id
+JOIN curso ON aluno_curso.curso_id = curso.id
+ORDER BY 1;
+
+
+CREATE SCHEMA academico;
+
+
+DROP VIEW vw_curso_de_programacao,vw_cursos_por_categoria;
+DROP TABLE aluno,categoria,curso,aluno_curso;
+
+
+CREATE TABLE academico.aluno (
+    id SERIAL PRIMARY KEY,
+	primeiro_nome VARCHAR(255) NOT NULL,
+	ultimo_nome VARCHAR(255) NOT NULL,
+	data_nascimento DATE NOT NULL
+);
+
+CREATE TABLE academico.categoria (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE academico.curso (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	categoria_id INTEGER NOT NULL REFERENCES academico.categoria(id)
+);
+
+CREATE TABLE academico.aluno_curso (
+	aluno_id INTEGER NOT NULL REFERENCES academico.aluno(id),
+	curso_id INTEGER NOT NULL REFERENCES academico.curso(id),
+	PRIMARY KEY (aluno_id, curso_id)
+);
+
+
+
+
+CREATE TEMPORARY TABLE a(
+ 	coluna VARCHAR(255) NOT NULL CHECK (coluna!='asd') 
+	CHECK (coluna!=''),
+	coluna2 VARCHAR(255) NOT NULL,
+	UNIQUE (coluna,coluna2)
+);
+
+DROP TABLE a;
+INSERT INTO a VALUES('','');
+INSERT INTO a VALUES('ASD','ASD');
+INSERT INTO a VALUES('asd');
+select * from a;
+
+ALTER TABLE a RENAME TO abc;
+select * from abc;
+
+ALTER TABLE abc RENAME coluna TO coluna1;
+
+ALTER TABLE abc ADD coluna3 VARCHAR(255);
+
+
+
+
+
+
+INSERT INTO academico.aluno(primeiro_nome,ultimo_nome,data_nascimento)
+VALUES ('Ola','Mundo','2022-07-29'),
+('Alo','Mundo','2021-07-29'),
+('Mundo','Ola','2020-09-19'),
+('Mundo','Alo','2010-04-29'),
+('Alo','Asd','2009-03-09'),
+('Ola','Asd','2008-02-12'),
+('Asd','Mundo','2018-01-23');
+
+
+INSERT INTO academico.categoria(nome) VALUES ('Front-End'),('Banco de dados'), ('Programação'), ('Data Science');
+
+
+
+INSERT INTO academico.curso(nome,categoria_id) VALUES
+	('HTML',1),
+	('CSS',1),
+	('JS',1),
+	('PHP',3),
+	('JAVA',3),
+	('C++',3),
+	('MySQL',2),
+	('PostgreSQL',2),
+	('Oracle DB',2),
+	('SQL Server',2),
+	('SQLite',2),
+	('Pandas',4),
+	('Machine Learning',4),
+	('Power BI',4);
+	
+	
+	INSERT INTO academico.aluno_curso VALUES 
+(1,4),
+(1,11),
+(2,1),
+(2,2),
+(3,4),
+(3,3),
+(4,4),
+(4,6),
+(4,5),
+(1,1);
+	
+	
+select * from academico.categoria;
+select * from academico.curso;
+
+SELECT *
+FROM academico.curso 
+JOIN academico.categoria ON academico.categoria.id=academico.curso.categoria_id
+WHERE categoria_id=2;
+
+SELECT academico.curso.id, academico.curso.nome
+FROM academico.curso 
+JOIN academico.categoria ON academico.categoria.id=academico.curso.categoria_id
+WHERE categoria_id=2;
+
+
+CREATE TEMPORARY TABLE curso_temp(
+id INTEGER PRIMARY KEY,
+	nome_do_curso  VARCHAR(255)
+);
+
+
+ALTER TABLE curso_temp ALTER COLUMN id TYPE INTEGER ;
+ALTER TABLE curso_temp ALTER COLUMN nome_do_curso SET NOT NULL;
+
+
+SELECT * FROM curso_temp;
+
+INSERT INTO curso_temp  SELECT academico.curso.id, academico.curso.nome
+FROM academico.curso 
+JOIN academico.categoria ON academico.categoria.id=academico.curso.categoria_id
+WHERE categoria_id=2; 
+
+
+CREATE SCHEMA teste;
+
+CREATE  TABLE teste.curso_programacao(
+id INTEGER PRIMARY KEY,
+	nome_do_curso  VARCHAR(255)
+);
+
+INSERT INTO teste.curso_programacao
+SELECT academico.curso.id, academico.curso.nome
+FROM academico.curso 
+JOIN academico.categoria ON academico.categoria.id=academico.curso.categoria_id
+WHERE categoria_id=2; 
+
+
+SELECT * FROM teste.curso_programacao;
+DELETE FROM teste.curso_programacao WHERE id>11;
+COPY teste.curso_programacao FROM 'C:/Users/User/Desktop/sql Alura/cursos.csv' USING DELIMITERS ','CSV HEADER ENCODING 'UTF8';
+
+select * from academico.curso;
+
+
+UPDATE academico.curso SET nome='MySQL Básico' WHERE nome='MySQL';
+UPDATE academico.curso SET nome='SQL Server Básico' WHERE nome='SQL Server';
+UPDATE academico.curso SET nome='PostgreSQL Básico' WHERE nome='PostgreSQL';
+UPDATE academico.curso SET nome='Oracle DB Básico' WHERE nome='Oracle DB';
+UPDATE academico.curso SET nome='SQLite Básico' WHERE nome='SQLite';
+
+
+UPDATE teste.curso_programacao SET nome_do_curso = nome 
+FROM academico.curso WHERE teste.curso_programacao.id=academico.curso.id;
+
+
+DELETE FROM curso
+      USING categoria
+      WHERE categoria.id = curso.categoria_id
+        AND categoria.nome = 'Teste';
+BEGIN;		
+
+DELETE FROM teste.curso_programacao;		
+SELECT * FROM teste.curso_programacao;
+ROLLBACK;
+SELECT * FROM teste.curso_programacao;
+
+
+
+BEGIN;		
+DELETE FROM teste.curso_programacao WHERE id=200;		
+COMMIT;
+SELECT * FROM teste.curso_programacao;
+
+
+
+CREATE SEQUENCE sequencia;
+
+CREATE TEMPORARY TABLE auto(
+	id INTEGER PRIMARY KEY DEFAULT NEXTVAL('sequencia'),
+	nome VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO auto(nome) VALUES('Mauricio');
+INSERT INTO auto(id,nome) VALUES (132,'Ola mundo');
+INSERT INTO auto(nome) VALUES('Alo mundo');
+select * from auto;
+SELECT NEXTVAL('sequencia');
+INSERT INTO auto(nome) VALUES('Asd mundo');
+
+CREATE TYPE CLASSIFICACAO AS ENUM ('LIVRE','12_ANOS','14_ANOS','16_ANOS','18_ANOS');
+
+
+CREATE TEMPORARY TABLE filme(
+id SERIAL PRIMARY KEY,
+	nome VARCHAR(255),
+	classificacao CLASSIFICACAO
+);
+
+INSERT INTO filme(nome,classificacao) VALUES ('OLA MUNDO','ASD');
+INSERT INTO filme(nome,classificacao) VALUES ('OLA MUNDO','LIVRE');
+select * from filme;
+http://pgdocptbr.sourceforge.net/pg80/ddl-alter.html#:~:text=Para%20adicionar%20uma%20coluna%2C%20utiliza,cl%C3%A1usula%20DEFAULT%20n%C3%A3o%20for%20especificada.
+
+
+
+
+
+

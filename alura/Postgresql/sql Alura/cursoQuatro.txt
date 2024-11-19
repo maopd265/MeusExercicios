@@ -1,0 +1,357 @@
+CREATE FUNCTION primeira_funcao() RETURNS INTEGER AS 
+'
+SELECT (2+2*2)
+' LANGUAGE SQL;
+SELECT primeira_funcao() as NUMERO;
+
+CREATE FUNCTION soma_dois_numeros(NUMERO_1 INTEGER, NUMERO_2 INTEGER) RETURNS INTEGER AS 
+'
+   SELECT (NUMERO_1+NUMERO_2)
+' LANGUAGE SQL;
+
+
+SELECT soma_dois_numeros(2,2);
+
+
+DROP FUNCTION soma_dois_numeros;
+CREATE FUNCTION soma_dois_numeros(INTEGER,INTEGER) RETURNS INTEGER AS 
+'
+   SELECT ($1+$2)
+' LANGUAGE SQL;
+
+
+
+CREATE FUNCTION cria_instrutor_falso() RETURNS instrutor AS $$
+	SELECT 22 AS id,'NOME FALSO' AS nome,200.0 AS salario;
+$$ LANGUAGE SQL;
+
+
+SELECT cria_instrutor_falso();
+SELECT * FROM cria_instrutor_falso();
+
+SELECT soma_dois_numeros(2,2);
+
+
+CREATE TABLE a( nome VARCHAR(255) NOT NULL);
+
+CREATE FUNCTION cria_a(nome VARCHAR) RETURNS VARCHAR AS 
+'
+	INSERT INTO a (nome) VALUES (cria_a.nome);
+	SELECT nome;
+' LANGUAGE SQL;
+
+SELECT cria_a('Ola mundo');
+SELECT cria_a('Mauricio');
+
+SELECT * FROM a;
+
+DROP FUNCTION cria_a;
+CREATE OR REPLACE FUNCTION cria_a(nome VARCHAR) RETURNS void AS 
+'
+	INSERT INTO a (nome) VALUES (cria_a.nome);
+	 
+' LANGUAGE SQL;
+
+
+
+CREATE OR REPLACE FUNCTION cria_a(nome VARCHAR) RETURNS void AS $$
+
+	INSERT INTO a (nome) VALUES (cria_a.nome);
+	 
+$$ LANGUAGE SQL;
+
+
+
+
+CREATE TABLE instrutor (
+id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	salario DECIMAL(10,2)
+);
+
+INSERT INTO instrutor (nome,salario) VALUES 
+('Vinicius Dias',100),
+('Horlando Dias',1000),
+('Danilo Dias',1001);
+
+CREATE FUNCTION dobro_do_salario(instrutor) RETURNS DECIMAL AS
+$$
+	SELECT $1.salario * 2 AS dobro;
+$$ LANGUAGE SQL;
+
+SELECT nome,dobro_do_salario(instrutor.*) FROM instrutor;
+
+
+CREATE TABLE users (firstname text, lastname text, id serial primary key);
+
+INSERT INTO users (firstname, lastname) VALUES ('Joe', 'Cool') RETURNING id;
+
+
+
+
+INSERT INTO instrutor (nome,salario) VALUES 
+('Nico Dias',1005),
+('Steppat Dias',10045),
+('Priscila Dias',10001);
+
+CREATE FUNCTION instrutores_bem_pagos(valor_salario DECIMAL) RETURNS SETOF instrutor AS $$
+	SELECT * FROM instrutor WHERE salario>valor_salario;
+$$ LANGUAGE SQL;
+
+SELECT * FROM instrutores_bem_pagos(1000);
+
+CREATE FUNCTION soma_e_produto(numero_1 INTEGER,numero_2 INTEGER,OUT soma INTEGER,OUT produto INTEGER) AS $$ 
+SELECT numero_1+numero_2 AS soma , numero_1*numero_2 AS produto;
+$$ LANGUAGE SQL;
+
+SELECT * FROM soma_e_produto(4,5);
+
+DROP FUNCTION soma_e_produto;
+
+CREATE TYPE dois_valores AS (soma INTEGER,produto INTEGER);
+
+CREATE FUNCTION soma_e_produto(numero_1 INTEGER,numero_2 INTEGER) RETURNS dois_valores AS $$ 
+SELECT numero_1+numero_2 AS soma , numero_1*numero_2 AS produto;
+$$ LANGUAGE SQL;
+
+DROP FUNCTION instrutores_bem_pagos;
+CREATE FUNCTION instrutores_bem_pagos(valor_salario DECIMAL,OUT nome VARCHAR,OUT salario DECIMAL) RETURNS SETOF record AS $$
+	SELECT nome,salario FROM instrutor WHERE salario>valor_salario;
+$$ LANGUAGE SQL;
+
+SELECT * FROM instrutores_bem_pagos(3000);
+
+
+
+CREATE OR REPLACE FUNCTION primeira_pl() RETURNS INTEGER AS $$ 
+	BEGIN
+		RETURN 1;
+	END
+$$ LANGUAGE plpgsql;
+
+
+SELECT primeira_pl();
+
+DROP FUNCTION primeira_pl;
+
+
+CREATE OR REPLACE FUNCTION primeira_pl() RETURNS INTEGER AS $$ 
+	DECLARE 
+		primeira_variavel INTEGER DEFAULT 3;
+	BEGIN
+		primeira_variavel:=primeira_variavel*2;
+		RETURN primeira_variavel;
+	END
+$$ LANGUAGE plpgsql;
+
+
+
+SELECT primeira_pl();
+
+
+
+CREATE TABLE alura.a( nome VARCHAR(255) NOT NULL);
+CREATE OR REPLACE FUNCTION cria_a(nome VARCHAR) RETURNS void AS $$
+	BEGIN
+	INSERT INTO alura.a (nome) VALUES (cria_a.nome);
+	 END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT cria_a('Mauricio');
+SELECT cria_a('Mauricio Zalamena');
+SELECT cria_a('Mauricio Zalamena Bavaresco');
+SELECT * FROM alura.a;
+
+
+CREATE FUNCTION cria_instrutor_falso() RETURNS alura.instrutor AS $$
+	BEGIN
+	RETURN ROW( 22 ,'NOME FALSO',200.0 )::alura.instrutor;
+	END;
+$$ LANGUAGE plpgsql;
+
+SELECT id,nome FROM cria_instrutor_falso();
+SELECT cria_instrutor_falso();
+SELECT * FROM cria_instrutor_falso();
+
+DROP FUNCTION cria_instrutor_falso;
+
+
+CREATE FUNCTION cria_instrutor_falso() RETURNS alura.instrutor AS $$
+	DECLARE
+		retorno alura.instrutor;
+	BEGIN
+	SELECT ( 22 ,'NOME FALSO',200.0 ) INTO retorno;
+	RETURN retorno;
+	END;
+$$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION instrutores_bem_pagos;
+CREATE FUNCTION instrutores_bem_pagos(valor_salario DECIMAL) RETURNS SETOF alura.instrutor AS $$
+	BEGIN
+	RETURN QUERY SELECT * FROM alura.instrutor WHERE salario>valor_salario;
+	END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM instrutores_bem_pagos(3000);
+
+
+CREATE FUNCTION salario_ok(instrutor alura.instrutor) RETURNS VARCHAR AS $$
+	BEGIN
+		IF instrutor.salario>200 THEN 
+			RETURN 'Salário está ok!';
+		ELSE
+			RETURN 'Salário pode aumentar!';
+		END IF;
+	END; 
+$$ LANGUAGE plpgsql;
+
+SELECT nome,salario,salario_ok(alura.instrutor.*) FROM alura.instrutor;
+
+DROP FUNCTION salario_ok;
+
+CREATE OR REPLACE FUNCTION salario_ok(id_instrutor INTEGER) RETURNS VARCHAR AS $$
+	DECLARE
+		instrutor alura.instrutor;
+	BEGIN
+		SELECT * FROM alura.instrutor WHERE id=id_instrutor INTO instrutor;
+		
+		/*IF instrutor.salario>1000 THEN 
+			RETURN 'Salário está ok!';
+		ELSEIF instrutor.salario=1000 THEN
+			RETURN 'Salário pode aumentar!';
+		ELSE 
+			RETURN 'Salário está defasado';
+		END IF;*/
+		
+		CASE 
+		
+			WHEN instrutor.salario<1000 THEN
+				RETURN 'Salário muito baixo!';
+			WHEN instrutor.salario=1000 THEN
+				RETURN 'Salário baixo!';
+			WHEN instrutor.salario>1001 THEN
+				RETURN 'Salário está ok!';
+			ELSE 
+				RETURN 'Salário padrão!';
+		END CASE;
+		
+		
+	END; 
+$$ LANGUAGE plpgsql;
+
+
+SELECT nome,salario,salario_ok(alura.instrutor.id) FROM alura.instrutor;
+-----
+-----AULA 5
+DROP FUNCTION tabuada;
+CREATE OR REPLACE FUNCTION tabuada(numero INTEGER) RETURNS SETOF VARCHAR AS $$
+	DECLARE
+		multiplicador INTEGER DEFAULT 1;
+	BEGIN
+		LOOP
+			RETURN NEXT numero || ' x ' ||multiplicador||' = '||numero *multiplicador;
+			multiplicador:=multiplicador+1;
+			EXIT WHEN multiplicador=10;
+		END LOOP;
+	
+	
+	END;
+$$ LANGUAGE plpgsql;
+
+SELECT tabuada(9);
+
+
+
+CREATE OR REPLACE FUNCTION tabuada(numero INTEGER) RETURNS SETOF VARCHAR AS $$
+	DECLARE
+		multiplicador INTEGER DEFAULT 1;
+	BEGIN
+		WHILE multiplicador<11 LOOP
+			RETURN NEXT numero || ' x ' ||multiplicador||' = '||numero *multiplicador;
+			multiplicador:=multiplicador+1;
+			 
+		END LOOP;
+	
+	
+	END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION tabuada(numero INTEGER) RETURNS SETOF VARCHAR AS $$
+	DECLARE
+		multiplicador INTEGER DEFAULT 1;
+	BEGIN
+		FOR multiplicador IN 1..10 LOOP
+		 
+			RETURN NEXT numero || ' x ' ||multiplicador||' = '||numero *multiplicador;
+		END LOOP;
+	END;
+$$ LANGUAGE plpgsql;
+
+
+
+CREATE FUNCTION instrutor_com_salario(OUT nome VARCHAR,OUT salario_ok VARCHAR) RETURNS SETOF record AS $$ 
+	DECLARE
+	 instrutor alura.instrutor;
+	BEGIN
+		FOR instrutor IN SELECT * FROM alura.instrutor LOOP
+			nome:=instrutor.nome;
+			 
+			salario_ok:=salario_ok(instrutor.id);
+			RETURN NEXT;
+		END LOOP;
+	END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT * FROM instrutor_com_salario();
+
+---aula ultima
+
+CREATE SCHEMA academico;
+
+CREATE TABLE academico.aluno (
+    id SERIAL PRIMARY KEY,
+	primeiro_nome VARCHAR(255) NOT NULL,
+	ultimo_nome VARCHAR(255) NOT NULL,
+	data_nascimento DATE NOT NULL
+);
+
+CREATE TABLE academico.categoria (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE academico.curso (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	categoria_id INTEGER NOT NULL REFERENCES academico.categoria(id)
+);
+
+CREATE TABLE academico.aluno_curso (
+	aluno_id INTEGER NOT NULL REFERENCES academico.aluno(id),
+	curso_id INTEGER NOT NULL REFERENCES academico.curso(id),
+	PRIMARY KEY (aluno_id, curso_id)
+);
+
+DROP FUNCTION nome_do_curso;
+CREATE FUNCTION nome_do_curso(nome_curso VARCHAR,nome_categoria VARCHAR) RETURNS void AS $$
+	DECLARE
+		id_categoria INTEGER;
+	BEGIN
+		SELECT id INTO id_categoria FROM academico.categoria WHERE nome=nome_categoria;
+		IF NOT FOUND THEN
+			INSERT INTO academico.categoria(nome) VALUES (nome_categoria) RETURNING id INTO id_categoria;
+		END IF;
+		
+		INSERT INTO academico.curso(nome,categoria_id) VALUES (nome_curso,id_categoria);
+	END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT nome_do_curso('PHP','Programação');
+SELECT nome_do_curso('Java','Programação');
+SELECT * FROM academico.curso;
+SELECT * FROM academico.categoria;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeando imagens</title>
+    <style type="text/css">
+        h3{
+            font-size: 30px;
+            font-family: broadway;
+            margin-left: 550px;
+            color: darkgreen;
+        }
+        body{
+            background-color: yellow;
+            margin: 0 0 0 0;
+        }
+        .mapaDoBrasil{
+            margin-left: 350px;
+        }
+        .section{
+            margin-left: 350px;
+        }
+    </style>
+</head>
+<body>
+    <h3> Mapa do Brasil </h3>
+    <figure>
+
+    
+    <img src="image/mapaDoBrasil.jpg" alt="Mapa do Brasil" widht="800px" height="500" usemap="#mapa" class="mapaDoBrasil">
+    <figcaption>Passe o mause sobre os territórios brasileiros</figcaption>
+    </figure>
+
+    <map name="mapa">
+        <area shape="rect" coords="247,425,277,444" href="./estados/rioGrandeDoSul.html" alt="RS" title="RS" target="alvo">
+    </map>
+    <section>
+        <section class="section">
+            <iframe src="" frameborder="0" name="alvo" width="400" height="150"></iframe>
+        </section>
+    </section>
+</body>
+</html>

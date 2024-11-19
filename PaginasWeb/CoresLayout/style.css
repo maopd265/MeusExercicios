@@ -1,0 +1,104 @@
+        body{
+            color:white;
+            background: brown;
+            margin: 0px;
+            padding: 0px;
+        }
+        header{
+            background: black;
+            height: 70px;
+            margin: 0px 0px 0px 0px;
+            font-size: 30px;
+            text-transform: uppercase;
+            
+        }
+        main{
+            background: white ;
+            color: black;
+            height: 450px;
+            width: 500px;
+            margin-left: 350px;
+            border: 1px solid black;
+        }
+        footer{
+            background: gray;
+            color: white;
+            height: 150px;
+            width: 1364px;
+            border: 1px solid black;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+        }
+        strong{
+            padding-left: 10px;
+            border-bottom: 1px solid black;
+        }
+        i{
+            border-bottom: 1px solid black;
+        }
+        .imgSW{
+            width:500px ;
+            height: 150px;
+        }
+        .divMain{
+            width: 400px;
+            height: 100px;
+            margin-top: 100px;
+            margin-left: 30px;
+        }
+        .divFooter{
+            width: 400px;
+            height: 100px;
+            margin-top: 35px;
+            margin-left: 500px;
+        }
+        .imgSpace{
+            padding-left: 10px;
+            
+        }
+        
+        nav{
+            position: absolute;
+            
+        }
+       nav a{
+            text-decoration: none;
+            color:white;
+            
+        }
+        nav li{
+            display: inline;
+            margin: 0 0 0 15px;
+        }
+        nav a:hover {
+            color: #C78C19;
+            text-decoration: underline;
+        }
+        .input-padrao {
+            display: block;
+            margin: 0 0 20px;
+            padding: 10px 25px;
+            width: 50%;
+        }
+        .label{
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        form{
+            padding-top: 30px;
+            padding-left: 10px;
+        }
+        .btnSubmit{
+            font-size: 28px;
+            background: white;
+        }
+        .btnSubmit:hover{
+            font-size: 28px;
+            color:red
+        }

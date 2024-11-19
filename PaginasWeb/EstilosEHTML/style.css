@@ -1,0 +1,9 @@
+body h1{
+    color:black;
+}
+h1{
+    color:blue;
+}
+div h1{
+    color:red;
+}

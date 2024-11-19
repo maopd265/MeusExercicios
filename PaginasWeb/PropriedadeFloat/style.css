@@ -1,0 +1,26 @@
+.imageCenter{
+    display: block;
+    margin:auto;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    clear: both;
+}
+header{
+    padding: 30px;
+    background-color: red;
+}
+ul li{
+    display: inline-block;
+    font-size: 30px;
+    margin: 10px;
+}
+body h1{
+    float:right;
+    
+}
+div{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}

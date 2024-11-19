@@ -1,0 +1,74 @@
+body
+{
+    background-color: #eb8e15;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px dotted black;
+    padding: 10px 10px 10px 10px;
+    font-family: sans-serif;
+}
+.gifImage
+{
+ align-items :"center";  
+ width:300px; 
+}
+div
+{
+    padding:10px;
+    margin-bottom: 20px;
+}
+h3
+{
+    width: 35%;
+    margin-right: 15%;
+    display: inline-block;
+    padding:10px; 
+    vertical-align: top;
+}
+h2
+{
+    padding:30px;
+}
+.imagens
+{
+    float: right;
+    width: 25%;
+    height: 5%;
+    
+}
+.divGif
+{
+    background-color: #805a29;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px dotted black;
+    padding: 10px 10px 10px 10px;
+    font-family: sans-serif;  
+}
+nav
+{
+    background-color:red; 
+}
+nav li
+{
+   display: inline;
+   margin: 0 0 0 15px;
+   
+}
+nav a
+{
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-decoration: none;
+    color:black;
+    
+}
+nav a:hover
+{
+    color:yellow;
+}
+/* .elixirDiv
+{
+    background-color:rgb(15, 12, 12);
+} */
